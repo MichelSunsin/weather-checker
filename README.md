@@ -1,5 +1,5 @@
 # weather-checker
-Simple app built using Vuejs and OpenWeather API. Vuex was used for state management for learning purposes only.
+App built using Vuejs, vuex and OpenWeather API.
 
 ## Project setup
 ```
