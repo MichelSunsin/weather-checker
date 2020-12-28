@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+  --primary-color: #42b983;
+  --secondary-color: #1e6645;
+  --faded-white: rgba(255, 255, 255, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+#app {
+  padding: 20px;
+  height: 100vh;
+  min-height: 500px;
+}
+
+.main-container {
+  color: white;
+  margin: auto;
+  padding: 1rem;
+  max-width: 500px;
+  background: linear-gradient(var(--primary-color), var(--secondary-color));
+  border-radius: 1rem;
+  transition: 0.5s;
+}
+
+.warm {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    bottom/cover url('./assets/warm-bg.jpg');
+  /* background-image: url('../assets/warm-bg.jpg');
+  background-position: bottom;
+  background-size: cover; */
+}
+
+.cold {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    bottom/cover url('./assets/cold-bg.png');
+  /* background-image: url('../assets/cold-bg.png');
+  background-position: bottom;
+  background-size: cover; */
+}
+
+.white-faded-background {
+  background: var(--faded-white);
+  border-radius: 0.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 0.5rem;
+  flex: auto;
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex: 1;
+  border: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+.search-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #d7d7d7;
+}
+
+.weather-box {
+  padding: 10px;
+  margin: 10px 100px;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.weather-box h1 {
+  font-size: 6rem;
+  text-shadow: 5px 5px rgba(53, 16, 16, 0.75);
+}
+
+.weather-box h2 {
+  font-weight: normal;
+  text-shadow: 1px 1px 5px black;
+}
+
+.description-box {
+  color: black;
+  margin: 0 120px;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.description-box-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(var(--primary-color), var(--secondary-color));
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.description-box-body {
+  padding: 15px 20px;
+}
+
+.description-box h2 {
+  color: white;
+  text-shadow: 2px 2px black;
+  font-style: italic;
+}
+
+.description-box h3 {
+  color: white;
+  font-weight: normal;
+  text-shadow: 1px 1px 10px black;
+  text-transform: capitalize;
+}
+
+.spinner-container {
+  padding: 20px;
+  background: radial-gradient(var(--secondary-color), var(--primary-color));
+}
+
+.spinner-container img {
+  width: 100px;
+  height: 100px;
+}
+
+.spinner-container h2 {
+  color: white;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.error-container {
+  padding: 0.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 1);
+  color: red;
+  border-radius: 20px;
+}
+
+.info-container {
+  background: linear-gradient(var(--primary-color), var(--secondary-color));
+  border-radius: 0.5rem;
+  padding: 20px;
+  font-size: 1.2rem;
+}
+
+.info-container .spotlight {
+  font-size: 1.2rem;
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  #app {
+    padding: 0;
+  }
+
+  .main-container {
+    border-radius: 0;
+    height: 100%;
+  }
+  .weather-box {
+    margin: 25px auto;
+  }
+
+  .description-box {
+    margin: 0 50px;
+  }
+
+  h1 {
+    font-size: 5rem;
+  }
+}

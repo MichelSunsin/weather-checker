@@ -12,9 +12,12 @@ const store = new Vuex.Store({
     currentWeather: null,
     query: '',
     isLoading: false,
+    isLocalWeather: false,
     error: '',
   },
   getters: {
+    isLoading: state => state.isLoading,
+    isLocalWeather: state => state.isLocalWeather,
     currentWeather: state => state.currentWeather,
     temp: state => Math.floor(state.currentWeather.main.temp),
     city: state => state.currentWeather.name,
@@ -32,10 +35,10 @@ const store = new Vuex.Store({
     setWeather(state, weather) {
       state.isLoading = false
       state.currentWeather = weather
-      state.currentWeather.name = state.currentWeather.name.trim() || ''
     },
     setError(state, message) {
       state.isLoading = false
+      state.isLocalWeather = false
       state.currentWeather = null
       state.error = message
       setInterval(() => {
@@ -57,6 +60,7 @@ const store = new Vuex.Store({
           const json = await response.json()
 
           if (response.ok) {
+            this.state.isLocalWeather = false
             context.commit('setWeather', json)
           } else {
             throw new Error(`Error ${json.cod} - ${json.message}`)
@@ -66,8 +70,15 @@ const store = new Vuex.Store({
         }
       }
     },
-    async fetchLocalWeather(context, { coords: { latitude, longitude } }) {
-      if (latitude && longitude) {
+    async fetchLocalWeather(context) {
+      if (this.state.currentPosition) {
+        const {
+          coords: { latitude, longitude },
+        } = this.state.currentPosition
+
+        this.state.isLoading = true
+        this.state.error = ''
+        this.state.currentWeather = null
         try {
           const response = await fetch(
             `${url}?lat=${latitude}&lon=${longitude}&units=metric&appid=${appid}`
@@ -76,6 +87,7 @@ const store = new Vuex.Store({
           const json = await response.json()
 
           if (response.ok) {
+            this.state.isLocalWeather = true
             context.commit('setWeather', json)
           } else {
             throw new Error(`Error ${json.cod} - ${json.message}`)
@@ -84,6 +96,11 @@ const store = new Vuex.Store({
           error.message && context.commit('setError', error.message)
         }
       }
+    },
+    clearWeather(context) {
+      this.state.currentWeather = null
+      this.state.query = ''
+      context.dispatch('fetchLocalWeather')
     },
   },
 })
