@@ -1,4 +1,5 @@
 # weather-checker
+App built using Vuejs, vuex and OpenWeather API.
 
 ## Project setup
 ```
